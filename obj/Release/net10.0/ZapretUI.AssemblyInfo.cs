@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZapretUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0a38fed949b10b04622863616183fec5a684504")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f132524a9db6f8396a8eedd700ec38d1539e8ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZapretUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZapretUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

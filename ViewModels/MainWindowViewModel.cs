@@ -20,9 +20,45 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public ObservableCollection<string> BatFiles { get; set; } = new ObservableCollection<string>();
     public string? SelectedBatFile { get; set; }
+
+
+    private string _statusText = "Статус: Остановлен";
+    public string StatusText
+    {
+        get => _statusText;
+        set => this.RaiseAndSetIfChanged(ref _statusText, value);
+    }
+
+    private bool _isZapretActive;
+    public bool IsZapretActive
+    {
+        get => _isZapretActive;
+        set => this.RaiseAndSetIfChanged(ref _isZapretActive, value);
+    }
+
+
+
+
+
     public MainWindowViewModel()
     {
+        UpdateStatus();
         ScanBatFiles();
+        this.WhenAnyValue(x => x.IsZapretActive)
+    .Subscribe(active =>
+    {
+        // Вызываем метод смены иконки в App
+        (App.Current as App)?.UpdateTrayIcon(active);
+    });
+    }
+
+    public void UpdateStatus()
+    {
+        // Ищем процесс по имени
+        bool running = Process.GetProcessesByName("winws").Any();
+
+        IsZapretActive = running;
+        StatusText = running ? "Статус: Активен" : "Статус: Остановлен";
     }
 
     public void ScanBatFiles()
@@ -83,6 +119,7 @@ public partial class MainWindowViewModel : ViewModelBase
             };
 
             await Task.Run(() => Process.Start(psi));
+            UpdateStatus();
         }
         catch (Exception ex)
         {
@@ -144,5 +181,6 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             try { p.Kill(); } catch { }
         }
+        UpdateStatus();
     }
 }

@@ -16,6 +16,8 @@
                 <ComboBox ItemsSource="{Binding BatFiles}"
                           SelectedItem="{Binding SelectedBatFile}"
                           HorizontalAlignment="Stretch" />
+                <TextBlock Text="{Binding StatusText}" FontWeight="Bold"
+                           HorizontalAlignment="Center"/>
                 <UniformGrid Columns="2">
                         <Button Content="ПУСК"
                                 Command="{Binding StartZapret}"
@@ -27,5 +29,6 @@
                                 HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                                 Background="DarkRed" Foreground="White"/>
                 </UniformGrid>
+
         </StackPanel>
 </Window>
