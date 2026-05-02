@@ -1,0 +1,61 @@
+# targets.txt - endpoint list for zapret.ps1 tests
+#
+# Format:
+#   KeyName = "https://host..."   -> Runs HTTP/TLS checks + ping
+#   KeyName = "PING:1.2.3.4"       -> Ping only
+#
+# Keys must be a single word (letters/digits/underscore), because the
+# script parses them as simple identifiers. You can add or remove lines.
+
+### Discord
+DiscordMain           = "https://discord.com"
+DiscordGateway        = "https://gateway.discord.gg"
+DiscordCDN            = "https://cdn.discordapp.com"
+DiscordUpdates        = "https://updates.discord.com"
+
+### YouTube
+YouTubeWeb            = "https://www.youtube.com"
+YouTubeShort          = "https://youtu.be"
+YouTubeImage          = "https://i.ytimg.com"
+YouTubeVideoRedirect  = "https://redirector.googlevideo.com"
+
+### Google
+GoogleMain            = "https://www.google.com"
+GoogleGstatic         = "https://www.gstatic.com"
+
+### Cloudflare
+CloudflareWeb         = "https://www.cloudflare.com"
+CloudflareCDN         = "https://cdnjs.cloudflare.com"
+
+### Public DNS (PING-only)
+CloudflareDNS1111     = "PING:1.1.1.1"
+CloudflareDNS1001     = "PING:1.0.0.1"
+GoogleDNS8888         = "PING:8.8.8.8"
+GoogleDNS8844         = "PING:8.8.4.4"
+Quad9DNS9999          = "PING:9.9.9.9"
+
+
+--wf-tcp=80,443,2053,2083,2087,2096,8443,12 --wf-udp=443,19294-19344,50000-50100,12 
+--filter-udp=443 --hostlist="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-general.txt" --hostlist="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-general-user.txt" --hostlist-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-exclude.txt" --hostlist-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-exclude-user.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude-user.txt" --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\quic_initial_www_google_com.bin" --new 
+--filter-udp=19294-19344,50000-50100 --filter-l7=discord,stun --dpi-desync=fake --dpi-desync-fake-discord="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\quic_initial_www_google_com.bin" --dpi-desync-fake-stun="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\quic_initial_www_google_com.bin" --dpi-desync-repeats=6 --new 
+--filter-tcp=2053,2083,2087,2096,8443 --hostlist-domains=discord.media --dpi-desync=fake,fakedsplit --dpi-desync-repeats=6 --dpi-desync-fooling=ts --dpi-desync-fakedsplit-pattern=0x00 --dpi-desync-fake-tls="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\tls_clienthello_www_google_com.bin" --new 
+--filter-tcp=443 --hostlist="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-google.txt" --ip-id=zero --dpi-desync=fake,fakedsplit --dpi-desync-repeats=6 --dpi-desync-fooling=ts --dpi-desync-fakedsplit-pattern=0x00 --dpi-desync-fake-tls="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\tls_clienthello_www_google_com.bin" --new 
+--filter-tcp=80,443 --hostlist="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-general.txt" --hostlist="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-general-user.txt" --hostlist-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-exclude.txt" --hostlist-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-exclude-user.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude-user.txt" --dpi-desync=fake,fakedsplit --dpi-desync-repeats=6 --dpi-desync-fooling=ts --dpi-desync-fakedsplit-pattern=0x00 --dpi-desync-fake-tls="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\stun.bin" --dpi-desync-fake-tls="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\tls_clienthello_www_google_com.bin" --dpi-desync-fake-http="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\tls_clienthello_max_ru.bin" --new 
+--filter-udp=443 --ipset="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-all.txt" --hostlist-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-exclude.txt" --hostlist-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-exclude-user.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude-user.txt" --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\quic_initial_www_google_com.bin" --new 
+--filter-tcp=80,443,8443 --ipset="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-all.txt" --hostlist-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-exclude.txt" --hostlist-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\list-exclude-user.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude-user.txt" --dpi-desync=fake,fakedsplit --dpi-desync-repeats=6 --dpi-desync-fooling=ts --dpi-desync-fakedsplit-pattern=0x00 --dpi-desync-fake-tls="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\stun.bin" --dpi-desync-fake-tls="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\tls_clienthello_www_google_com.bin" --dpi-desync-fake-http="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\tls_clienthello_max_ru.bin" --new 
+--filter-tcp=12 --ipset="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-all.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude-user.txt" --dpi-desync=fake,fakedsplit --dpi-desync-repeats=6 --dpi-desync-any-protocol=1 --dpi-desync-cutoff=n4 --dpi-desync-fooling=ts --dpi-desync-fakedsplit-pattern=0x00 --dpi-desync-fake-tls="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\stun.bin" --dpi-desync-fake-tls="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\tls_clienthello_www_google_com.bin" --dpi-desync-fake-http="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\tls_clienthello_max_ru.bin" --new 
+--filter-udp=12 --ipset="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-all.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude.txt" --ipset-exclude="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\lists\ipset-exclude-user.txt" --dpi-desync=fake --dpi-desync-repeats=12 --dpi-desync-any-protocol=1 --dpi-desync-fake-unknown-udp="C:\Users\Lenovo\Documents\Projects\cs\ss\ZapretUI\bin\Debug\net10.0\zapret\bin\quic_initial_dbankcloud_ru.bin" --dpi-desync-cutoff=n3
+
+
+ $"--wf-tcp=80,443,2053,2083,2087,2096,8443,{GameFilterTCP} --wf-udp=443,19294-19344,50000-50100,{GameFilterUDP} " +
+            $"--filter-udp=443 --hostlist=\"{listsDir}\\list-general.txt\" --hostlist=\"{listsDir}\\list-general-user.txt\" --hostlist-exclude=\"{listsDir}\\list-exclude.txt\" --hostlist-exclude=\"{listsDir}\\list-exclude-user.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude-user.txt\" --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic=\"{binDir}\\quic_initial_www_google_com.bin\" --new " +
+            $"--filter-udp=19294-19344,50000-50100 --filter-l7=discord,stun --dpi-desync=fake --dpi-desync-fake-discord=\"{binDir}\\quic_initial_www_google_com.bin\" --dpi-desync-fake-stun=\"{binDir}\\quic_initial_www_google_com.bin\" --dpi-desync-repeats=6 --new " +
+            $"--filter-tcp=2053,2083,2087,2096,8443 --hostlist-domains=discord.media --dpi-desync=fake,hostfakesplit --dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com --dpi-desync-hostfakesplit-mod=host=www.google.com,altorder=1 --dpi-desync-fooling=ts --new " +
+            $"--filter-tcp=443 --hostlist=\"{listsDir}\\list-google.txt\" --ip-id=zero --dpi-desync=fake,hostfakesplit --dpi-desync-fake-tls-mod=rnd,dupsid,sni=www.google.com --dpi-desync-hostfakesplit-mod=host=www.google.com,altorder=1 --dpi-desync-fooling=ts --new " +
+            $"--filter-tcp=80,443 --hostlist=\"{listsDir}\\list-general.txt\" --hostlist=\"{listsDir}\\list-general-user.txt\" --hostlist-exclude=\"{listsDir}\\list-exclude.txt\" --hostlist-exclude=\"{listsDir}\\list-exclude-user.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude-user.txt\" --dpi-desync=fake,hostfakesplit --dpi-desync-fake-tls-mod=rnd,dupsid,sni=ya.ru --dpi-desync-hostfakesplit-mod=host=ya.ru,altorder=1 --dpi-desync-fooling=ts --dpi-desync-fake-http=\"{binDir}\\tls_clienthello_max_ru.bin\" --new " +
+            $"--filter-udp=443 --ipset=\"{listsDir}\\ipset-all.txt\" --hostlist-exclude=\"{listsDir}\\list-exclude.txt\" --hostlist-exclude=\"{listsDir}\\list-exclude-user.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude-user.txt\" --dpi-desync=fake --dpi-desync-repeats=6 --dpi-desync-fake-quic=\"{binDir}\\quic_initial_www_google_com.bin\" --new " +
+            $"--filter-tcp=80,443,8443 --ipset=\"{listsDir}\\ipset-all.txt\" --hostlist-exclude=\"{listsDir}\\list-exclude.txt\" --hostlist-exclude=\"{listsDir}\\list-exclude-user.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude-user.txt\" --dpi-desync=fake,hostfakesplit --dpi-desync-fake-tls-mod=rnd,dupsid,sni=ya.ru --dpi-desync-hostfakesplit-mod=host=ya.ru,altorder=1 --dpi-desync-fooling=ts --dpi-desync-fake-http=\"{binDir}\\tls_clienthello_max_ru.bin\" --new " +
+            $"--filter-tcp={GameFilterTCP} --ipset=\"{listsDir}\\ipset-all.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude-user.txt\" --dpi-desync=fake,hostfakesplit --dpi-desync-any-protocol=1 --dpi-desync-cutoff=n4 --dpi-desync-fake-tls-mod=rnd,dupsid,sni=ya.ru --dpi-desync-hostfakesplit-mod=host=ya.ru,altorder=1 --dpi-desync-fooling=ts --dpi-desync-fake-http=\"{binDir}\\tls_clienthello_max_ru.bin\" --new " +
+            $"--filter-udp={GameFilterUDP} --ipset=\"{listsDir}\\ipset-all.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude.txt\" --ipset-exclude=\"{listsDir}\\ipset-exclude-user.txt\" --dpi-desync=fake --dpi-desync-repeats=10 --dpi-desync-any-protocol=1 --dpi-desync-fake-unknown-udp=\"{binDir}\\quic_initial_dbankcloud_ru.bin\" --dpi-desync-cutoff=n4";
+
+        try
