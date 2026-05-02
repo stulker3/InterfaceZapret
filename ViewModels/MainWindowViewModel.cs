@@ -78,7 +78,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 FileName = exePath,
                 Arguments = args,
                 WorkingDirectory = binDir,
-                WindowStyle = ProcessWindowStyle.Normal,
+                WindowStyle = ProcessWindowStyle.Hidden,
                 UseShellExecute = true
             };
 
