@@ -66,8 +66,8 @@ public partial class App : Application
         {
             // Пути к вашим иконкам
             string iconUri = isActive
-                ? "avares://ZapretUI/Assets/active.ico"
-                : "avares://ZapretUI/Assets/inactive.ico";
+                ? "avares://ZapretUI/Assets/avalonia-logo.ico"
+                : "avares://ZapretUI/Assets/avalonia-logo.ico";
 
             try
             {
