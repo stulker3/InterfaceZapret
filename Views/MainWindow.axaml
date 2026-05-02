@@ -3,31 +3,26 @@
         xmlns:vm="using:ZapretUI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="250"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
         x:Class="ZapretUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="ZapretUI">
-    <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Spacing="15">
-        <TextBlock Text="Выберите конфигурацию (.bat):" FontWeight="Bold"/>
-        <ComboBox ItemsSource="{Binding BatFiles}" 
-                  SelectedItem="{Binding SelectedBatFile}"
-                  HorizontalAlignment="Stretch" />
-    <UniformGrid Columns="2">
-            <Button Content="ПУСК"
-                    Command="{Binding StartZapret}"
-                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                    Background="DarkGreen" Foreground="White"/>
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Spacing="15">
+                <TextBlock Text="Выберите конфигурацию (.bat):" FontWeight="Bold"/>
+                <ComboBox ItemsSource="{Binding BatFiles}"
+                          SelectedItem="{Binding SelectedBatFile}"
+                          HorizontalAlignment="Stretch" />
+                <UniformGrid Columns="2">
+                        <Button Content="ПУСК"
+                                Command="{Binding StartZapret}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                Background="DarkGreen" Foreground="White"/>
 
-            <Button Content="СТОП"
-                    Command="{Binding StopZapret}"
-                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                    Background="DarkRed" Foreground="White"/>
-        </UniformGrid>
-        <Button Content="Обновить список файлов" 
-                Command="{Binding ScanBatFiles}"
-                HorizontalAlignment="Center"
-                Classes="Flat" FontSize="10"/>
-                <TextBox Text="{Binding CurrentArgs}" FontWeight="Bold"/>
-    </StackPanel>
+                        <Button Content="СТОП"
+                                Command="{Binding StopZapret}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                Background="DarkRed" Foreground="White"/>
+                </UniformGrid>
+        </StackPanel>
 </Window>

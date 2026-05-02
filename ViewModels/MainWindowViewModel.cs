@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using System.Reactive; // Нужен для ReactiveCommand
+using System.Reactive;
 using ReactiveUI;
 
 namespace ZapretUI.ViewModels;
@@ -18,17 +18,13 @@ public partial class MainWindowViewModel : ViewModelBase
     private const string GameFilterTCP = "12";
     private const string GameFilterUDP = "12";
 
-    // Список батников для комбобокса
     public ObservableCollection<string> BatFiles { get; set; } = new ObservableCollection<string>();
-    // Выбранный файл
     public string? SelectedBatFile { get; set; }
-    // Явное объявление события
     public MainWindowViewModel()
     {
         ScanBatFiles();
     }
 
-    // Метод сканирования папки
     public void ScanBatFiles()
     {
         try
@@ -93,20 +89,6 @@ public partial class MainWindowViewModel : ViewModelBase
             Debug.WriteLine($"Ошибка запуска: {ex.Message}");
         }
     }
-    private string _currentArgs = "Выберите файл";
-    public string CurrentArgs
-    {
-        get => _currentArgs;
-        set => this.RaiseAndSetIfChanged(ref _currentArgs, value);
-    }
-    public void ShowArguments()
-    {
-        if (string.IsNullOrEmpty(SelectedBatFile)) return;
-
-        string batPath = Path.Combine(Path.Combine(AppContext.BaseDirectory, "zapret\\"), SelectedBatFile);
-        CurrentArgs = GetArgsFromBat(batPath);
-    }
-    // Метод GetArgsFromBat остается прежним из предыдущего ответа...
     private string GetArgsFromBat(string fileName)
     {
         string batPath = Path.Combine(AppContext.BaseDirectory, "zapret\\", fileName);
@@ -127,7 +109,6 @@ public partial class MainWindowViewModel : ViewModelBase
             if (trimmedLine.Contains("winws.exe"))
             {
                 startFound = true;
-                // Отрезаем всё, что до winws.exe (включая сам экзешник)
                 int index = trimmedLine.IndexOf("winws.exe");
 
                 trimmedLine = trimmedLine.Substring(index + 11).Trim();
