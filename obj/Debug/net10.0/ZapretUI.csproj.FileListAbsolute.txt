@@ -289,3 +289,4 @@ c:\Users\Lenovo\Documents\Projects\cs\InterfaceZapret\obj\Debug\net10.0\refint\Z
 c:\Users\Lenovo\Documents\Projects\cs\InterfaceZapret\obj\Debug\net10.0\ZapretUI.pdb
 c:\Users\Lenovo\Documents\Projects\cs\InterfaceZapret\obj\Debug\net10.0\ZapretUI.genruntimeconfig.cache
 c:\Users\Lenovo\Documents\Projects\cs\InterfaceZapret\obj\Debug\net10.0\ref\ZapretUI.dll
+C:\Users\Lenovo\Documents\Projects\cs\InterfaceZapret\obj\Debug\net10.0\ZapretUI.sourcelink.json
