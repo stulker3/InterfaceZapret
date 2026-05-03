@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bACfpjbi8N0=",
+  "dgSpecHash": "OL+xP0dXUrw=",
   "success": true,
   "projectFilePath": "C:\\Users\\Lenovo\\Documents\\Projects\\cs\\InterfaceZapret\\ZapretUI.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,7 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.io.recyclablememorystream\\3.0.1\\microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.net.illink.tasks\\10.0.1\\microsoft.net.illink.tasks.10.0.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\reactiveui\\20.1.1\\reactiveui.20.1.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\skiasharp\\3.119.4-preview.1.1\\skiasharp.3.119.4-preview.1.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\skiasharp.nativeassets.linux\\3.119.4-preview.1.1\\skiasharp.nativeassets.linux.3.119.4-preview.1.1.nupkg.sha512",
@@ -40,7 +41,10 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\splat\\15.1.1\\splat.15.1.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.reactive\\6.0.1\\system.reactive.6.0.1.nupkg.sha512",
-    "C:\\Users\\Lenovo\\.nuget\\packages\\tmds.dbus.protocol\\0.92.0\\tmds.dbus.protocol.0.92.0.nupkg.sha512"
+    "C:\\Users\\Lenovo\\.nuget\\packages\\tmds.dbus.protocol\\0.92.0\\tmds.dbus.protocol.0.92.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\10.0.1\\microsoft.netcore.app.runtime.win-x64.10.0.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\10.0.1\\microsoft.windowsdesktop.app.runtime.win-x64.10.0.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\10.0.1\\microsoft.aspnetcore.app.runtime.win-x64.10.0.1.nupkg.sha512"
   ],
   "logs": []
 }

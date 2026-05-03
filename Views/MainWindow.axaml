@@ -11,7 +11,7 @@
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
         >
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Spacing="15">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Spacing="10">
                 <TextBlock Text="Выберите конфигурацию (.bat):" FontWeight="Bold"/>
                 <ComboBox ItemsSource="{Binding BatFiles}"
                           SelectedItem="{Binding SelectedBatFile}"
@@ -19,16 +19,22 @@
                 <TextBlock Text="{Binding StatusText}" FontWeight="Bold"
                            HorizontalAlignment="Center"/>
                 <UniformGrid Columns="2">
-                        <Button Content="ПУСК"
+                        <Button Content="Пуск"
                                 Command="{Binding StartZapret}"
                                 HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                                 Background="DarkGreen" Foreground="White"/>
 
-                        <Button Content="СТОП"
+                        <Button Content="Стоп"
                                 Command="{Binding StopZapret}"
                                 HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                                 Background="DarkRed" Foreground="White"/>
                 </UniformGrid>
+                <TextBlock Text="{Binding TestStatus}" FontWeight="Bold"
+                           HorizontalAlignment="Center"/>
+                <Button Content="Запустить Тест"
+                        Command="{Binding RunAutoTestAsync}"
+                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                        Background="#00208B" Foreground="White"/>
 
         </StackPanel>
 </Window>

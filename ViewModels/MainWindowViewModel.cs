@@ -15,8 +15,8 @@ namespace ZapretUI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    private const string GameFilterTCP = "12";
-    private const string GameFilterUDP = "12";
+    private const string GameFilterTCP = "1024-65535";
+    private const string GameFilterUDP = "1024-65535";
 
     public ObservableCollection<string> BatFiles { get; set; } = new ObservableCollection<string>();
     public string? SelectedBatFile { get; set; }
@@ -51,6 +51,79 @@ public partial class MainWindowViewModel : ViewModelBase
         (App.Current as App)?.UpdateTrayIcon(active);
     });
     }
+
+
+
+    private string _testStatus = "Готов к тесту";
+    public string TestStatus
+    {
+        get => _testStatus;
+        set => this.RaiseAndSetIfChanged(ref _testStatus, value);
+    }
+
+    public async Task RunAutoTestAsync()
+    {
+        string scriptPath = Path.Combine(AppContext.BaseDirectory, "zapret", "utils", "test zapret.ps1");
+
+        if (!File.Exists(scriptPath))
+        {
+            TestStatus = "Ошибка: Скрипт теста не найден!";
+            return;
+        }
+
+        TestStatus = "Тестирование запущено. Подождите...";
+
+        ProcessStartInfo psi = new ProcessStartInfo
+        {
+            FileName = "powershell",
+            Arguments = $"-NoProfile -ExecutionPolicy Bypass -File \"{scriptPath}\"",
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            CreateNoWindow = true,
+            StandardOutputEncoding = Encoding.UTF8
+        };
+
+        try
+        {
+            using var process = new Process();
+            process.StartInfo = psi;
+
+            process.OutputDataReceived += (sender, e) =>
+            {
+                if (string.IsNullOrEmpty(e.Data)) return;
+
+                // Ловим финальный результат
+                if (e.Data.Contains("RESULT_STRATEGY_FOUND:"))
+                {
+                    string strategy = e.Data.Replace("RESULT_STRATEGY_FOUND:", "").Trim();
+
+                    Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+                    {
+                        TestStatus = "Лучшая стратегия на сегодня " + strategy;
+                    });
+                }
+                else if (e.Data.Contains("Config:")) // Для живого лога
+                {
+                    Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+                    {
+                        TestStatus = $"Проверка: {e.Data.Trim()}";
+                    });
+                }
+            };
+
+            process.Start();
+            process.BeginOutputReadLine();
+            await process.WaitForExitAsync();
+        }
+        catch (Exception ex)
+        {
+            TestStatus = $"Ошибка: {ex.Message}";
+        }
+    }
+
+
+
+
 
     public void UpdateStatus()
     {

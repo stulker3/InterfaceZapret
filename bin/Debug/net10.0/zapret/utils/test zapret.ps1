@@ -384,7 +384,7 @@ function Read-TestType {
         Write-Host "Select test type:" -ForegroundColor Cyan
         Write-Host "  [1] Standard tests (HTTP/ping)" -ForegroundColor Gray
         Write-Host "  [2] DPI checkers (TCP 16-20 freeze)" -ForegroundColor Gray
-        $choice = Read-Host "Enter 1 or 2"
+        $choice = '1'
         switch ($choice) {
             '1' { return 'standard' }
             '2' { return 'dpi' }
@@ -400,7 +400,7 @@ function Read-ModeSelection {
         Write-Host "Select test run mode:" -ForegroundColor Cyan
         Write-Host "  [1] All configs" -ForegroundColor Gray
         Write-Host "  [2] Selected configs" -ForegroundColor Gray
-        $choice = Read-Host "Enter 1 or 2"
+        $choice = '1'
         switch ($choice) {
             '1' { return 'all' }
             '2' { return 'select' }
@@ -919,9 +919,10 @@ try {
     }
 
     Add-Content $resultFile "Best strategy: $bestConfig"
+ Write-Output "RESULT_STRATEGY_FOUND: $bestConfig" 
 
     Write-Host "Results saved to $resultFile" -ForegroundColor Green
-
+    Write-Host ""
 } catch {
     Write-Host "[ERROR] An error occurred during tests. Restoring ipset..." -ForegroundColor Red
     if ($originalIpsetStatus -and $originalIpsetStatus -ne "any") {
@@ -939,6 +940,5 @@ try {
 }
 
     Write-Host "Press any key to close..." -ForegroundColor Yellow
-    [void][System.Console]::ReadKey($true)
     exit
 }
