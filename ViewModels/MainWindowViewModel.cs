@@ -10,25 +10,53 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using System.Reactive;
 using ReactiveUI;
+using Avalonia.Interactivity;
+using System.Reactive.Linq;
 
 namespace ZapretUI.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    private const string GameFilterTCP = "1024-65535";
-    private const string GameFilterUDP = "1024-65535";
+    private string _gameFilterTCP = "12";
+    public string GameFilterTCP
+    {
+        get => _gameFilterTCP;
+        set => this.RaiseAndSetIfChanged(ref _gameFilterTCP, value);
+    }
+    private string _gameFilterUDP = "12";
+    public string GameFilterUDP
+    {
+        get => _gameFilterUDP;
+        set => this.RaiseAndSetIfChanged(ref _gameFilterUDP, value);
+    }
+    private const string TaskName = "InterfaceZapret";
+    private string _testStatus = "Готов к тесту";
 
     public ObservableCollection<string> BatFiles { get; set; } = new ObservableCollection<string>();
-    public string? SelectedBatFile { get; set; }
-
-
+    private string? _selectedBatFile;
+    public string? SelectedBatFile
+    {
+        get => _selectedBatFile;
+        set => this.RaiseAndSetIfChanged(ref _selectedBatFile, value);
+    }
+    private bool _isGameMode = true;
+    public bool IsGameMode
+    {
+        get => _isGameMode;
+        set => this.RaiseAndSetIfChanged(ref _isGameMode, value);
+    }
     private string _statusText = "Статус: Остановлен";
     public string StatusText
     {
         get => _statusText;
         set => this.RaiseAndSetIfChanged(ref _statusText, value);
     }
-
+    private bool _isGameModeActive;
+    public bool IsGameModeActive
+    {
+        get => _isGameModeActive;
+        set => this.RaiseAndSetIfChanged(ref _isGameModeActive, value);
+    }
     private bool _isZapretActive;
     public bool IsZapretActive
     {
@@ -36,14 +64,31 @@ public partial class MainWindowViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _isZapretActive, value);
     }
 
-
-
-
-
+    private readonly string _filePathZapret = Path.Combine(AppContext.BaseDirectory, "zapret\\lists\\list-general-user.txt");
+    private readonly string _filePathExclude = Path.Combine(AppContext.BaseDirectory, "zapret\\lists\\list-exclude-user.txt");
+    private string _zapretText = string.Empty;
+    public string ZapretText
+    {
+        get => _zapretText;
+        set => this.RaiseAndSetIfChanged(ref _zapretText, value);
+    }
+    private string _excludeText = string.Empty;
+    public string ExcludeText
+    {
+        get => _excludeText;
+        set => this.RaiseAndSetIfChanged(ref _excludeText, value);
+    }
+    public string TestStatus
+    {
+        get => _testStatus;
+        set => this.RaiseAndSetIfChanged(ref _testStatus, value);
+    }
     public MainWindowViewModel()
     {
         UpdateStatus();
         ScanBatFiles();
+        SetTextZapret();
+        SetTextExclude();
         this.WhenAnyValue(x => x.IsZapretActive)
     .Subscribe(active =>
     {
@@ -52,13 +97,51 @@ public partial class MainWindowViewModel : ViewModelBase
     });
     }
 
-
-
-    private string _testStatus = "Готов к тесту";
-    public string TestStatus
+    public void SetTextZapret()
     {
-        get => _testStatus;
-        set => this.RaiseAndSetIfChanged(ref _testStatus, value);
+        if (File.Exists(_filePathZapret))
+        {
+            try
+            {
+                _zapretText = File.ReadAllText(_filePathZapret);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка чтения файла: {ex.Message}");
+            }
+        }
+        this.WhenAnyValue(x => x.ZapretText)
+   .ObserveOn(RxApp.MainThreadScheduler)
+   .Subscribe(text => SaveToFile(text, _filePathZapret));
+    }
+    public void SetTextExclude()
+    {
+        if (File.Exists(_filePathExclude))
+        {
+            try
+            {
+                _excludeText = File.ReadAllText(_filePathExclude);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка чтения файла: {ex.Message}");
+            }
+        }
+        this.WhenAnyValue(x => x.ExcludeText)
+    .ObserveOn(RxApp.MainThreadScheduler)
+    .Subscribe(text => SaveToFile(text, _filePathExclude));
+    }
+
+    private void SaveToFile(string text, string filePath)
+    {
+        try
+        {
+            File.WriteAllText(filePath, text);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Ошибка записи в файл: {ex.Message}");
+        }
     }
 
     public async Task RunAutoTestAsync()
@@ -95,12 +178,19 @@ public partial class MainWindowViewModel : ViewModelBase
                 // Ловим финальный результат
                 if (e.Data.Contains("RESULT_STRATEGY_FOUND:"))
                 {
-                    string strategy = e.Data.Replace("RESULT_STRATEGY_FOUND:", "").Trim();
+                    string _strategy = e.Data.Replace("RESULT_STRATEGY_FOUND:", "").Trim();
 
                     Avalonia.Threading.Dispatcher.UIThread.Post(() =>
                     {
-                        TestStatus = "Лучшая стратегия на сегодня " + strategy;
+                        TestStatus = "Лучшая стратегия на сегодня " + _strategy;
                     });
+                    foreach (var strategy in BatFiles)
+                    {
+                        if (_strategy == strategy)
+                        {
+                            SelectedBatFile = strategy;
+                        }
+                    }
                 }
                 else if (e.Data.Contains("Config:")) // Для живого лога
                 {
@@ -120,10 +210,6 @@ public partial class MainWindowViewModel : ViewModelBase
             TestStatus = $"Ошибка: {ex.Message}";
         }
     }
-
-
-
-
 
     public void UpdateStatus()
     {
@@ -199,6 +285,7 @@ public partial class MainWindowViewModel : ViewModelBase
             Debug.WriteLine($"Ошибка запуска: {ex.Message}");
         }
     }
+
     private string GetArgsFromBat(string fileName)
     {
         string batPath = Path.Combine(AppContext.BaseDirectory, "zapret\\", fileName);
@@ -255,5 +342,125 @@ public partial class MainWindowViewModel : ViewModelBase
             try { p.Kill(); } catch { }
         }
         UpdateStatus();
+    }
+
+    public async Task GameModeChange()
+    {
+        this.WhenAnyValue(x => x.IsGameModeActive)
+                   .Subscribe(isActive =>
+                   {
+                       GameFilterUDP = isActive ? "1024-65535" : "12";
+                       GameFilterTCP = isActive ? "1024-65535" : "12";
+                   });
+
+        await ApplyZapret();
+    }
+
+    public static void EnableAutostart()
+    {
+        // Получаем путь к текущему запущенному .exe файлу
+        string? exePath = Process.GetCurrentProcess().MainModule?.FileName;
+
+        if (string.IsNullOrEmpty(exePath) || !File.Exists(exePath))
+            return;
+
+        // Формируем аргументы для schtasks
+        // /Create - создать задачу
+        // /TN - имя задачи
+        // /TR - путь к файлу (в кавычках)
+        // /SC ONLOGON - запускать при входе пользователя
+        // /RL HIGHEST - запуск с правами администратора
+        // /F - принудительно перезаписать, если задача уже есть
+        string arguments = $"/Create /TN \"{TaskName}\" /TR \"\\\"{exePath}\\\"\" /SC ONLOGON /RL HIGHEST /F";
+
+        RunSchtasks(arguments);
+    }
+
+    public static void DisableAutostart()
+    {
+        // /Delete - удалить задачу
+        // /TN - имя задачи
+        // /F - удалить без подтверждения
+        string arguments = $"/Delete /TN \"{TaskName}\" /F";
+
+        RunSchtasks(arguments);
+    }
+
+    private static void RunSchtasks(string arguments)
+    {
+        try
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = "schtasks",
+                Arguments = arguments,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true
+            };
+
+            using (Process process = Process.Start(startInfo))
+            {
+                process.WaitForExit();
+
+                // Для отладки можно проверить process.ExitCode (0 - успех)
+                if (process.ExitCode != 0)
+                {
+                    string error = process.StandardError.ReadToEnd();
+                    Console.WriteLine($"Ошибка schtasks: {error}");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Не удалось изменить автозагрузку: {ex.Message}");
+        }
+    }
+
+    public static bool IsAutostartEnabled()
+    {
+        try
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = "schtasks",
+                // /Query — запросить информацию, /TN — имя нашей задачи
+                Arguments = $"/Query /TN \"{TaskName}\"",
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true
+            };
+
+            using (Process process = Process.Start(startInfo))
+            {
+                process.WaitForExit();
+
+                // Если код возврата равен 0, значит Windows нашла задачу с таким именем.
+                // Если код возврата 1 (или другой), значит задачи в системе нет.
+                return process.ExitCode == 0;
+            }
+        }
+        catch
+        {
+            // Если что-то пошло не так (например, доступ заблокирован), считаем, что автозапуска нет
+            return false;
+        }
+    }
+
+    public async Task ApplyZapret()
+    {
+        if (IsZapretActive)
+        {
+            StopZapret();
+            await StartZapret();
+            UpdateStatus();
+        }
+        else
+        {
+            StopZapret();
+            UpdateStatus();
+        }
     }
 }

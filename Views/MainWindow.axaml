@@ -3,7 +3,7 @@
         xmlns:vm="using:ZapretUI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
         x:Class="ZapretUI.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -11,30 +11,107 @@
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
         >
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" Spacing="10">
-                <TextBlock Text="Выберите конфигурацию (.bat):" FontWeight="Bold"/>
-                <ComboBox ItemsSource="{Binding BatFiles}"
-                          SelectedItem="{Binding SelectedBatFile}"
-                          HorizontalAlignment="Stretch" />
-                <TextBlock Text="{Binding StatusText}" FontWeight="Bold"
-                           HorizontalAlignment="Center"/>
-                <UniformGrid Columns="2">
-                        <Button Content="Пуск"
-                                Command="{Binding StartZapret}"
-                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                                Background="DarkGreen" Foreground="White"/>
+        <Window.Styles>
+                <!-- 1. СТИЛЬ: КОГДА КНОПКА НЕ НАЖАТА (Выключена) -->
+                <Style Selector="ToggleButton.GameModeToggle:unchecked /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="Background" Value="#B10C0C" /> <!-- Красный фон -->
+                        <Setter Property="Foreground" Value="White" />    <!-- Белый текст -->
+                </Style>
 
-                        <Button Content="Стоп"
-                                Command="{Binding StopZapret}"
-                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                                Background="DarkRed" Foreground="White"/>
-                </UniformGrid>
-                <TextBlock Text="{Binding TestStatus}" FontWeight="Bold"
-                           HorizontalAlignment="Center"/>
-                <Button Content="Запустить Тест"
-                        Command="{Binding RunAutoTestAsync}"
-                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                        Background="#00208B" Foreground="White"/>
+                <!-- Цвет при наведении мыши на ВЫКЛЮЧЕННУЮ кнопку -->
+                <Style Selector="ToggleButton.GameModeToggle:unchecked:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="Background" Value="#D11A1A" /> <!-- Чуть светлее красный -->
+                        <Setter Property="Foreground" Value="White" />
+                </Style>
 
-        </StackPanel>
+                <!-- 2. СТИЛЬ: КОГДА КНОПКА НАЖАТА (Включена) -->
+                <Style Selector="ToggleButton.GameModeToggle:checked /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="Background" Value="#0CB12C" /> <!-- Зеленый фон -->
+                        <Setter Property="Foreground" Value="White" />    <!-- Белый текст -->
+                </Style>
+
+                <!-- Цвет при наведении мыши на ВКЛЮЧЕННУЮ кнопку -->
+                <Style Selector="ToggleButton.GameModeToggle:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                        <Setter Property="Background" Value="#13D438" /> <!-- Чуть светлее зеленый -->
+                        <Setter Property="Foreground" Value="White" />
+                </Style>
+        </Window.Styles>
+        <TabControl Margin="20" SelectedIndex="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <!-- Первая вкладка -->
+                <TabItem Header="Пуск">
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Spacing="10">
+                                <TextBlock Text="Выберите конфигурацию (.bat):" FontWeight="Bold"/>
+                                <ComboBox ItemsSource="{Binding BatFiles}"
+                                          SelectedItem="{Binding SelectedBatFile}"
+                                          HorizontalAlignment="Stretch" />
+                                <TextBlock Text="{Binding StatusText}" FontWeight="Bold"
+                                           HorizontalAlignment="Center"/>
+                                <UniformGrid Columns="2">
+                                        <Button Content="Пуск"
+                                                Command="{Binding StartZapret}"
+                                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                                Background="DarkGreen" Foreground="White"/>
+
+                                        <Button Content="Стоп"
+                                                Command="{Binding StopZapret}"
+                                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                                Background="DarkRed" Foreground="White"/>
+                                </UniformGrid>
+                                <TextBlock Text="{Binding TestStatus}" FontWeight="Bold"
+                                           HorizontalAlignment="Center"/>
+                                <Button Content="Запустить Тест"
+                                        Command="{Binding RunAutoTestAsync}"
+                                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                        Background="#00208B" Foreground="White"/>
+                                <ToggleButton  Classes="GameModeToggle"
+                                               Content="GameMode"
+                                               IsChecked="{Binding IsGameModeActive}"
+                                               HorizontalAlignment="Stretch"
+                                               HorizontalContentAlignment="Center"
+                                               Foreground="White"/>
+
+                        </StackPanel>
+                </TabItem>
+
+                <!-- Вторая вкладка -->
+                <TabItem Header="Домены">
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Spacing="10">
+                                <TabControl Margin="5">
+
+                                        <!-- Внутренняя вкладка 1 -->
+                                        <TabItem Header="Через Запрет">
+                                                <StackPanel Margin="10" Spacing="10">
+                                                        <TextBox AcceptsReturn="True"
+                                                                 TextWrapping="Wrap"
+                                                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                                 Height="200"
+                                                                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                                 Text="{Binding ZapretText, Mode=TwoWay}"
+                                                                 Watermark="Всё что будет проходить через запрет"/>
+
+                                                </StackPanel>
+                                        </TabItem>
+
+                                        <!-- Внутренняя вкладка 2 -->
+                                        <TabItem Header="Исключения">
+                                                <StackPanel Margin="10" Spacing="10">
+                                                        <TextBox AcceptsReturn="True"
+                                                                 TextWrapping="Wrap"
+                                                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                                 Text="{Binding ExcludeText, Mode=TwoWay}"
+                                                                 Watermark="Исключения что не будут проходить через запрет"/>
+                                                </StackPanel>
+                                        </TabItem>
+
+                                </TabControl>
+                                <Button Grid.Row="1"
+                                        Content="Применить"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,10,0,0"
+                                        Padding="20,8"/>
+                        </StackPanel>
+                </TabItem>
+        </TabControl>
+
 </Window>

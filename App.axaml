@@ -15,11 +15,15 @@
     <TrayIcon.Icons>
         <TrayIcons>
             <TrayIcon
-            Icon="/Assets/avalonia-logo.ico"
-            ToolTipText="ZapretUI: Остановлен"
-            Clicked="TrayIcon_OnClicked">
+                Icon="/Assets/avalonia-logo.ico"
+                ToolTipText="ZapretUI: Остановлен"
+                Clicked="TrayIcon_OnClicked">
                 <TrayIcon.Menu>
                     <NativeMenu>
+                        <NativeMenuItem Header="Автозапуск"
+                                        ToggleType="CheckBox"
+                                        Click="Autostart_OnClick"/>
+
                         <NativeMenuItem Header="Развернуть" Click="TrayIcon_Open_Clicked" />
                         <NativeMenuItem Header="Выход" Click="TrayIcon_Exit_Clicked" />
                     </NativeMenu>

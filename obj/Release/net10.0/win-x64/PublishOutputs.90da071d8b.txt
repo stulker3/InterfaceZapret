@@ -1,0 +1,4 @@
+C:\Users\Lenovo\Documents\Projects\InterfaceZapret-main\bin\Release\net10.0\win-x64\publish\ZapretUI.pdb
+C:\Users\Lenovo\Documents\Projects\InterfaceZapret-main\bin\Release\net10.0\win-x64\publish\libHarfBuzzSharp.pdb
+C:\Users\Lenovo\Documents\Projects\InterfaceZapret-main\bin\Release\net10.0\win-x64\publish\libSkiaSharp.pdb
+C:\Users\Lenovo\Documents\Projects\InterfaceZapret-main\bin\Release\net10.0\win-x64\publish\ZapretUI.exe

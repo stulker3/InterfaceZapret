@@ -10,6 +10,7 @@ using System;
 using System.Diagnostics;
 using Avalonia.Controls;
 using Avalonia.Platform;
+using static ZapretUI.ViewModels.MainWindowViewModel;
 
 namespace ZapretUI;
 
@@ -31,6 +32,7 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+        UpdateButtonTick();
     }
     private void TrayIcon_OnClicked(object? sender, EventArgs e) => ShowWindow();
 
@@ -66,8 +68,8 @@ public partial class App : Application
         {
             // Пути к вашим иконкам
             string iconUri = isActive
-                ? "avares://ZapretUI/Assets/avalonia-logo.ico"
-                : "avares://ZapretUI/Assets/avalonia-logo.ico";
+                ? "avares://ZapretUI/Assets/avalonia-logo-on.ico"
+                : "avares://ZapretUI/Assets/avalonia-logo-off.ico";
 
             try
             {
@@ -81,4 +83,49 @@ public partial class App : Application
             }
         }
     }
+    private void UpdateButtonTick()
+    {
+        try
+        {
+            // Получаем иконку трея
+            var trayIcon = TrayIcon.GetIcons(this)?.FirstOrDefault();
+
+            // Находим нужный NativeMenuItem по его тексту на экране
+            var autostartItem = trayIcon?.Menu?.Items
+                .OfType<NativeMenuItem>()
+                .FirstOrDefault(item => item.Header?.ToString() == "Автозапуск");
+
+            if (autostartItem != null)
+            {
+                // Запрашиваем реальный статус из Windows и ставим/убираем галочку
+                autostartItem.IsChecked = IsAutostartEnabled();
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Ошибка обновления галочки: {ex.Message}");
+        }
+    }
+    private void Autostart_OnClick(object? sender, EventArgs e)
+    {
+        if (sender is NativeMenuItem menuItem)
+        {
+            // 1. Проверяем текущий статус из системы
+            bool currentlyEnabled = IsAutostartEnabled();
+
+            // 2. Меняем статус на противоположный
+            if (currentlyEnabled)
+            {
+                DisableAutostart();
+            }
+            else
+            {
+                EnableAutostart();
+            }
+
+            // 3. Запрашиваем систему еще раз и ставим галочку на основе РЕАЛЬНОГО состояния в Windows
+            UpdateButtonTick();
+        }
+    }
+
 }

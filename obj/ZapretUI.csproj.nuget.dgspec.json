@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lenovo\\Documents\\Projects\\cs\\InterfaceZapret\\ZapretUI.csproj": {}
+    "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret-main 2\\ZapretUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lenovo\\Documents\\Projects\\cs\\InterfaceZapret\\ZapretUI.csproj": {
+    "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret-main 2\\ZapretUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\Documents\\Projects\\cs\\InterfaceZapret\\ZapretUI.csproj",
+        "projectUniqueName": "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret-main 2\\ZapretUI.csproj",
         "projectName": "ZapretUI",
-        "projectPath": "C:\\Users\\Lenovo\\Documents\\Projects\\cs\\InterfaceZapret\\ZapretUI.csproj",
+        "projectPath": "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret-main 2\\ZapretUI.csproj",
         "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\Documents\\Projects\\cs\\InterfaceZapret\\obj\\",
+        "outputPath": "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret-main 2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -67,20 +67,12 @@
               "version": "[12.0.2, )"
             },
             "AvaloniaUI.DiagnosticsSupport": {
-              "include": "None",
-              "suppressParent": "All",
               "target": "Package",
               "version": "[2.2.1, )"
             },
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.4.1, )"
-            },
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[10.0.1, )",
-              "autoReferenced": true
             }
           },
           "imports": [
@@ -94,20 +86,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[10.0.1, 10.0.1]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[10.0.1, 10.0.1]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[10.0.1, 10.0.1]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -388,11 +366,6 @@
             "System.Xml.XPath": "(,4.3.32767]",
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
-        }
-      },
-      "runtimes": {
-        "win-x64": {
-          "#import": []
         }
       }
     }
