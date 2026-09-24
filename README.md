@@ -1,6 +1,6 @@
 ## Сторонние компоненты
 
-В этом проекте используется [tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy), созданный автором [Flowseal](https://github.com/Flowseal).
+В этом проекте используется [tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy), а также файлы батников, созданный автором [Flowseal](https://github.com/Flowseal).
 
 `tg-ws-proxy` используется для обеспечения локальной функциональности MTProto-прокси для Telegram.
 
@@ -12,3 +12,5 @@ Copyright (c) 2026 Flowseal
 Все права на исходный код `tg-ws-proxy` принадлежат его автору и участникам разработки.
 
 Текст оригинальной лицензии см. в файле `Zapret/TgWsProxy/LICENSE`.
+
+Все исполняемые и системные файлы в папке bin взяты из zapret-win-bundle/zapret-winws и zapret/releases.
