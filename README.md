@@ -1,6 +1,6 @@
 ## Сторонние компоненты
 
-В этом проекте используется [tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy), а также файлы [батников](), созданный автором [Flowseal](https://github.com/Flowseal).
+В этом проекте используется [tg-ws-proxy](https://github.com/Flowseal/tg-ws-proxy), а также файлы [батников](), созданные автором [Flowseal](https://github.com/Flowseal).
 
 `tg-ws-proxy` используется для обеспечения локальной функциональности MTProto-прокси для Telegram.
 
