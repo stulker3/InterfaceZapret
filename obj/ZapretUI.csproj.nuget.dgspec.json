@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret-main 2\\ZapretUI.csproj": {}
+    "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret\\ZapretUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret-main 2\\ZapretUI.csproj": {
+    "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret\\ZapretUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret-main 2\\ZapretUI.csproj",
+        "projectUniqueName": "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret\\ZapretUI.csproj",
         "projectName": "ZapretUI",
-        "projectPath": "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret-main 2\\ZapretUI.csproj",
+        "projectPath": "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret\\ZapretUI.csproj",
         "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret-main 2\\obj\\",
+        "outputPath": "C:\\Users\\Lenovo\\Documents\\Projects\\InterfaceZapret\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",

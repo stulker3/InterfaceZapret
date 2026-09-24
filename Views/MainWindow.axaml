@@ -38,7 +38,7 @@
         </Window.Styles>
         <TabControl Margin="20" SelectedIndex="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <!-- Первая вкладка -->
-                <TabItem Header="Пуск">
+                <TabItem Header="Запрет">
                         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" Spacing="10">
                                 <TextBlock Text="Выберите конфигурацию (.bat):" FontWeight="Bold"/>
                                 <ComboBox ItemsSource="{Binding BatFiles}"
@@ -69,6 +69,10 @@
                                                HorizontalAlignment="Stretch"
                                                HorizontalContentAlignment="Center"
                                                Foreground="White"/>
+                                <Button Content="Подключить tgws к телеграмму"
+                                        Command="{Binding ConnectTelegram}"
+                                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                        Background="#00208B" Foreground="White"/>
 
                         </StackPanel>
                 </TabItem>
@@ -98,6 +102,7 @@
                                                         <TextBox AcceptsReturn="True"
                                                                  TextWrapping="Wrap"
                                                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                                 Height="200"
                                                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                                                                  Text="{Binding ExcludeText, Mode=TwoWay}"
                                                                  Watermark="Исключения что не будут проходить через запрет"/>

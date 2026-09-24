@@ -46,6 +46,7 @@ public partial class App : Application
         {
             // Чтобы winws тоже закрылся при выходе, можно вызвать StopZapret
             (desktop.MainWindow.DataContext as ViewModels.MainWindowViewModel)?.StopZapret();
+            (desktop.MainWindow.DataContext as ViewModels.MainWindowViewModel)?.StopTelegramProxy();
             desktop.Shutdown();
         }
     }
